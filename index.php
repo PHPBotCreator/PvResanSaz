@@ -57,7 +57,7 @@ $admin = ایدی عدد شما;
 $userbot = "یوزرنیم ربا شما همرا با @";
 $channel = "یوزرنیم کانال همرا با @";
 $step = file_get_contents("data/".$from_id."/step.txt");
-
+$ban = file_get_contents('data/banlist.txt');
 //-------
 function SendMessage($ChatId, $TextMsg)
 {
@@ -95,6 +95,10 @@ $inch = file_get_contents("https://api.telegram.org/bot".API_KEY."/getChatMember
 SendMessage($chat_id,"برای استفاده از ربات اول در کانال ما عضو شوید.
 @"$channel"");
 }
+if (strpos($ban , "$from_id") !== false  ) {
+SendMessage($chat_id,"You Are Banned From Server.🤓\nDon't Message Again...😎\n➖➖➖➖➖➖➖➖➖➖\nدسترسی شما به این سرور مسدود شده است.🤓\nلطفا پیام ندهید...😎");
+	}
+
 elseif(isset($update->callback_query)){
     $callbackMessage = '';
     var_dump(makereq('answerCallbackQuery',[
@@ -583,7 +587,31 @@ var_dump(makereq('sendMessage',[
        		])
     		]));
 }
+	elseif (strpos($textmessage , "/ban" ) !== false ) {
+if ($from_id == $admin) {
+$text = str_replace("/ban","",$textmessage);
+$myfile2 = fopen("data/banlist.txt", 'a') or die("Unable to open file!");	
+fwrite($myfile2, "$text\n");
+fclose($myfile2);
+SendMessage($admin,"شما کاربر $text را در لیست بن لیست قرار دادید!\n برای در اوردن این کاربر از بن از دستور زیر استفاده کنید\n/unban $text");
+}
+else {
+SendMessage($chat_id,"⛔️ شما ادمین نیستید.");
+}
+}
 
+elseif (strpos($textmessage , "/unban" ) !== false ) {
+if ($from_id == $admin) {
+$text = str_replace("/unban","",$textmessage);
+			$newlist = str_replace($text,"",$ban);
+			save("data/banlist.txt",$newlist);
+SendMessage($admin,"شما کاربر $text را از لیست بن ها در اوردید!");
+}
+else {
+SendMessage($chat_id,"⛔️ شما ادمین نیستید.");
+}
+}
+	
 else
 {
 SendMessage($chat_id,"پیام شما پیدا نشد❌\n Your command could not be found❌");
