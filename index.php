@@ -7,7 +7,7 @@
 # if you need Help for develop this source , You Can Send Message To Me With @SpyGuard_BOT #
 ############################################################################################
 */
-define('API_KEY','233635555:AAGoH04nawrKBg6OtlfANLq3NP1LmLF297Y');
+define('API_KEY','توکن ربات');
 //----######------
 function makereq($method,$datas=[]){
     $url = "https://api.telegram.org/bot".API_KEY."/".$method;
@@ -61,7 +61,9 @@ $textmessage = isset($update->message->text)?$update->message->text:'';
 $txtmsg = $update->message->text;
 $reply = $update->message->reply_to_message->forward_from->id;
 $stickerid = $update->message->reply_to_message->sticker->file_id;
-$admin = 66443035;
+$admin = ایدی عدد شما;
+$userbot = "یوزرنیم ربا شما همرا با @";
+$channel = "یوزرنیم کانال همرا با @";
 $step = file_get_contents("data/".$from_id."/step.txt");
 
 //-------
@@ -95,11 +97,11 @@ function save($filename,$TXTdata)
 	fclose($myfile);
 	}
 //===========
-$inch = file_get_contents("https://api.telegram.org/bot".API_KEY."/getChatMember?chat_id=@DevelopersCity&user_id=".$from_id);
+$inch = file_get_contents("https://api.telegram.org/bot".API_KEY."/getChatMember?chat_id=@"$channel"&user_id=".$from_id);
 	
 	if (strpos($inch , '"status":"left"') !== false ) {
 SendMessage($chat_id,"برای استفاده از ربات اول در کانال ما عضو شوید.
-@DevelopersCity");
+@"$channel"");
 }
 elseif(isset($update->callback_query)){
     $callbackMessage = '';
@@ -124,7 +126,7 @@ elseif(isset($update->callback_query)){
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
-                        ['text'=>"به کانال ما بپیوندید",'url'=>"https://telegram.me/DevelopersCity"]
+                        ['text'=>"به کانال ما بپیوندید",'url'=>"https://telegram.me/"$channel""]
                     ]
                 ]
             ])
@@ -140,7 +142,7 @@ elseif(isset($update->callback_query)){
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
-                        ['text'=>"به کانال ما بپیوندید",'url'=>"https://telegram.me/DevelopersCity"]
+                        ['text'=>"به کانال ما بپیوندید",'url'=>"https://telegram.me/"$channel""]
                     ]
                 ]
             ])
@@ -161,7 +163,7 @@ var_dump(makereq('sendMessage',[
 
 🔹برای ساخت ربات از دکمه ی 🔄 ساخت ربات استفاده نمایید.
 
-🤖 @PvSazBot",
+🤖 @"$userbot"",
 		'parse_mode'=>'MarkDown',
         	'reply_markup'=>json_encode([
             	'keyboard'=>[
@@ -240,10 +242,10 @@ $token = $textmessage ;
 		SendMessage($chat_id,"در حال ساخت ربات ...");
 		if (file_exists("bots/$un/index.php")) {
 		$source = file_get_contents("bot/index.php");
-		$source = str_replace("[*BOTTOKEN*]",$token,$source);
-		$source = str_replace("66443035",$from_id,$source);
+		$source = str_replace("**TOKEN**",$token,$source);
+		$source = str_replace("**ADMIN**",$from_id,$source);
 		save("bots/$un/index.php",$source);	
-		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=http://zirgozaronline.ir/tg/PvSazBot/bots/$un/index.php");
+		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=ادرس webhook/bots/$un/index.php");
 
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
@@ -307,7 +309,7 @@ var_dump(makereq('sendMessage',[
 		$source = str_replace("[*BOTTOKEN*]",$token,$source);
 		$source = str_replace("66443035",$from_id,$source);
 		save("bots/$un/index.php",$source);	
-		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=http://zirgozaronline.ir/tg/PvSazBot/bots/$un/index.php");
+		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=ادرس webhook/bots/$un/index.php");
 
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
@@ -392,7 +394,7 @@ var_dump(makereq('sendMessage',[
 
 🔹برای ساخت ربات از دکمه ی 🔄 ساخت ربات استفاده نمایید.
 
-🤖 @PvSazBot",
+🤖 @"$userbot"",
 		'parse_mode'=>'MarkDown',
         	'reply_markup'=>json_encode([
             	'keyboard'=>[
@@ -481,6 +483,6 @@ var_dump(makereq('sendMessage',[
 
 else
 {
-SendMessage($chat_id,"Soon ...");
+SendMessage($chat_id,"پیام شما پید نشد❌");
 }
 ?>
