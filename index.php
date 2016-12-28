@@ -118,11 +118,11 @@ elseif(isset($update->callback_query)){
         makereq('editMessageText',[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>"ربات شما با موفقیت حذف شد !",
+            'text'=>"ربات شما با موفقیت حذف شد !\n Robot has ben deleted!",
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
-                        ['text'=>"به کانال ما بپیوندید",'url'=>"https://telegram.me/"$channel""]
+                        ['text'=>"به کانال ما بپیوندید - Pease join to my channel",'url'=>"https://telegram.me/"$channel""]
                     ]
                 ]
             ])
@@ -134,11 +134,11 @@ elseif(isset($update->callback_query)){
         makereq('editMessageText',[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>"خطا",
+            'text'=>"خطا-Error",
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
-                        ['text'=>"به کانال ما بپیوندید",'url'=>"https://telegram.me/"$channel""]
+                        ['text'=>"به کانال ما بپیوندید - Pleas join to my channel",'url'=>"https://telegram.me/"$channel""]
                     ]
                 ]
             ])
@@ -147,28 +147,19 @@ elseif(isset($update->callback_query)){
  }
 }
 
-elseif ($textmessage == '🔙 برگشت') {
+elseif ($textmessage == '🔙 برگشت - Back') {
 save("data/$from_id/step.txt","none");
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
-        	'text'=>"سلــام 👋😉
+        	'text'=>"🔃 به منوی اصلی خوش آمدید
 
-🔹 به سرویس پیام رسان تلگرام خوش آمدید 🌹.
-
-🔸 با استفاده از این سرویس شما میتوانید رباتی جهت ارائه پشتیبانی به کاربران ربات، کانال، گروه یا وبسایت خود ایجاد کنید.
-
-🔹برای ساخت ربات از دکمه ی 🔄 ساخت ربات استفاده نمایید.
-
-🤖 @"$userbot"",
+🔃 Welcome To Main Menu",
 		'parse_mode'=>'MarkDown',
         	'reply_markup'=>json_encode([
             	'keyboard'=>[
-                [
-                   ['text'=>"🔄 ساخت ربات"],['text'=>"🚀 ربات های من"],['text'=>"☢ حذف ربات"]
-                ],
-                [
-                   ['text'=>"ℹ️ راهنما"],['text'=>"🔰 قوانین"]
-                ]
+  [
+                   ['text'=>"فارسی 🇮🇷"],['text'=>"English 🇦🇺"]          
+]
                 
             	],
             	'resize_keyboard'=>true
@@ -187,12 +178,14 @@ unlink("bots/".$botun."/index.php");
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
         	'text'=>"🚀 ربات شما با موفقیت پاک شده است 
-یک ربات جدید بسازید 😄",
+یک ربات جدید بسازید 😄
+Yur Robot has ben deleted 
+Please create new bot",
 		'parse_mode'=>'MarkDown',
         	'reply_markup'=>json_encode([
             	'keyboard'=>[
                 [
-                   ['text'=>"🔄 ساخت ربات"],['text'=>"🔙 برگشت"]
+                   ['text'=>"/start"]
                 ]
                 
             	],
@@ -202,11 +195,13 @@ var_dump(makereq('sendMessage',[
 }
 else {
 SendMessage($chat_id,"خطا!
-شما نمی توانید این ربات را پاک کنید ! ");
+شما نمی توانید این ربات را پاک کنید !
+Error 
+You cant delete this bot");
 }
 }
 else {
-SendMessage($chat_id,"یافت نشد.");
+SendMessage($chat_id,"یافت نشد.\n Not found");
 }
 }
 elseif ($step == 'create bot') {
@@ -231,11 +226,11 @@ $token = $textmessage ;
 	$ok = $resultb["ok"];
 		if($ok != 1) {
 			//Token Not True
-			SendMessage($chat_id,"توکن نا معتبر!");
+			SendMessage($chat_id,"توکن نا معتبر!\nYour token is invalid");
 		}
 		else
 		{
-		SendMessage($chat_id,"در حال ساخت ربات ...");
+		SendMessage($chat_id,"در حال ساخت ربات ...\n Your");
 		if (file_exists("bots/$un/index.php")) {
 		$source = file_get_contents("bot/index.php");
 		$source = str_replace("**TOKEN**",$token,$source);
@@ -246,13 +241,13 @@ $token = $textmessage ;
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
         	'text'=>"🚀 ربات شما با موفقیت آپدیت شده است 
-
-[برای ورود به ربات خود کلیک کنید 😃](https://telegram.me/$un)",
+Your Robot Has ben Created
+[برای ورود به ربات خود کلیک کنید 😃 - start Bot](https://telegram.me/$un)",
 		'parse_mode'=>'MarkDown',
         	'reply_markup'=>json_encode([
             	'keyboard'=>[
                 [
-                   ['text'=>"🔄 ساخت ربات"],['text'=>"🔙 برگشت"]
+                   ['text'=>"🔙 برگشت - Back"]
                 ]
                 
             	],
@@ -309,14 +304,13 @@ var_dump(makereq('sendMessage',[
 
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
-        	'text'=>"🚀 ربات شما با موفقیت نصب شده است 
-
-[برای ورود به ربات خود کلیک کنید 😃](https://telegram.me/$un)",
-		'parse_mode'=>'MarkDown',
+        	'text'=>"🚀 ربات شما با موفقیت نصب شده است Your Robot Has ben Created
+[برای ورود به ربات خود کلیک کنید 😃 - start Bot](https://telegram.me/$un)",		
+                'parse_mode'=>'MarkDown',
         	'reply_markup'=>json_encode([
             	'keyboard'=>[
                 [
-                   ['text'=>"🔄 ساخت ربات"],['text'=>"🔙 برگشت"]
+                   ['text'=>"🔙 برگشت - Back"]
                 ]
                 
             	],
