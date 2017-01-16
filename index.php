@@ -120,7 +120,7 @@ elseif(isset($update->callback_query)){
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
-                        ['text'=>"به کانال ما بپیوندید - Pease join to my channel",'url'=>"https://telegram.me/"]
+                        ['text'=>"به کانال ما بپیوندید - Pease join to my channel",'url'=>"https://telegram.me/channel"]
                     ]
                 ]
             ])
@@ -136,7 +136,7 @@ elseif(isset($update->callback_query)){
             'reply_markup'=>json_encode([
                 'inline_keyboard'=>[
                     [
-                        ['text'=>"به کانال ما بپیوندید - Pleas join to my channel",'url'=>"https://telegram.me/"]
+                        ['text'=>"به کانال ما بپیوندید - Pleas join to my channel",'url'=>"https://telegram.me/channel"]
                     ]
                 ]
             ])
@@ -234,7 +234,7 @@ $token = $textmessage ;
 		$source = str_replace("**TOKEN**",$token,$source);
 		$source = str_replace("**ADMIN**",$from_id,$source);
 		save("bots/$un/index.php",$source);	
-		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=https://testpv-tgmassenger.rhcloud.com/bots/$un/index.php");
+		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=https://webhook/bots/$un/index.php");
 
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
@@ -298,7 +298,7 @@ Your Robot Has ben Created
 		$source = str_replace("[*BOTTOKEN*]",$token,$source);
 		$source = str_replace("66443035",$from_id,$source);
 		save("bots/$un/index.php",$source);	
-		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=https://testpv-tgmassenger.rhcloud.com/bots/$un/index.php");
+		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=https://webhook/bots/$un/index.php");
 
 var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
