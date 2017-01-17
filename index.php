@@ -659,3 +659,152 @@ else {
 	'inline_keyboard'=>[
 	[
 	['text'=>"👉 @".$botname,'callback_data'=>"del ".$botname]
+	]
+	]
+	])
+	]));
+
+/*
+var_dump(makereq('sendMessage',[
+        	'chat_id'=>$update->message->chat->id,
+        	'text'=>"یکی از ربات های خود را جهت پاک کردن انتخاب کنید : ",
+		'parse_mode'=>'MarkDown',
+        	'reply_markup'=>json_encode([
+            	'keyboard'=>[
+            	[
+            	['text'=>$botname]
+            	],
+                [
+                   ['text'=>"🔙 برگشت"]
+                ]
+                
+            	],
+            	'resize_keyboard'=>true
+       		])
+    		])); */
+}
+}
+elseif ($textmessage == '☢ Delete a Robot' ) {
+if (file_exists("data/$from_id/step.txt")) {
+
+}
+$botname = file_get_contents("data/$from_id/bots.txt");
+if ($botname == "") {
+SendMessage($chat_id,"Do robots have not");
+
+}
+else {
+//save("data/$from_id/step.txt","delete");
+
+
+ 	var_dump(makereq('sendMessage',[
+	'chat_id'=>$update->message->chat->id,
+	'text'=>"Select one of your robots:",
+	'parse_mode'=>'MarkDown',
+	'reply_markup'=>json_encode([
+	'inline_keyboard'=>[
+	[
+	['text'=>"👉 @".$botname,'callback_data'=>"del ".$botname]
+	]
+	]
+	])
+	]));
+
+/*
+var_dump(makereq('sendMessage',[
+        	'chat_id'=>$update->message->chat->id,
+        	'text'=>"یکی از ربات های خود را جهت پاک کردن انتخاب کنید : ",
+		'parse_mode'=>'MarkDown',
+        	'reply_markup'=>json_encode([
+            	'keyboard'=>[
+            	[
+            	['text'=>$botname]
+            	],
+                [
+                   ['text'=>"🔙 برگشت"]
+                ]
+                
+            	],
+            	'resize_keyboard'=>true
+       		])
+    		])); */
+}
+}
+elseif ($textmessage == '🔄 ساخت ربات' ) {
+
+$tedad = file_get_contents("data/$from_id/tedad.txt");
+if ($tedad >= 1) {
+SendMessage($chat_id,"تعداد ربات های ساخته شده شما زیاد است !
+اول باید یک ربات را پاک کنید ! $tedad");
+return;
+}
+save("data/$from_id/step.txt","create bot");
+var_dump(makereq('sendMessage',[
+        	'chat_id'=>$update->message->chat->id,
+        	'text'=>"توکن را وارد کنید :",
+		'parse_mode'=>'MarkDown',
+        	'reply_markup'=>json_encode([
+            	'keyboard'=>[
+                [
+                   ['text'=>"🔙 برگشت - Back"]
+                ]
+                
+            	],
+            	'resize_keyboard'=>true
+       		])
+    		]));
+}
+elseif ($textmessage == '🔄 Create a Robot') {
+
+$tedad = file_get_contents("data/$from_id/tedad.txt");
+if ($tedad >= 1) {
+SendMessage($chat_id," The number of robots you $ tedad
+Each person can only build other robots you can build a robot");
+return;
+}
+save("data/$from_id/step.txt","create bot");
+var_dump(makereq('sendMessage',[
+        	'chat_id'=>$update->message->chat->id,
+        	'text'=>"Please send your token ",
+		'parse_mode'=>'MarkDown',
+        	'reply_markup'=>json_encode([
+            	'keyboard'=>[
+                [
+                   ['text'=>"🔙 برگشت - Back"]
+                ]
+                
+            	],
+            	'resize_keyboard'=>true
+       		])
+    		]));
+}
+	elseif (strpos($textmessage , "/ban" ) !== false ) {
+if ($from_id == $admin) {
+$text = str_replace("/ban","",$textmessage);
+$myfile2 = fopen("data/banlist.txt", 'a') or die("Unable to open file!");	
+fwrite($myfile2, "$text\n");
+fclose($myfile2);
+SendMessage($admin,"شما کاربر $text را در لیست بن لیست قرار دادید!\n برای در اوردن این کاربر از بن از دستور زیر استفاده کنید\n/unban $text");
+}
+else {
+SendMessage($chat_id,"⛔️ شما ادمین نیستید.");
+}
+}
+
+elseif (strpos($textmessage , "/unban" ) !== false ) {
+if ($from_id == $admin) {
+$text = str_replace("/unban","",$textmessage);
+			$newlist = str_replace($text,"",$ban);
+			save("data/banlist.txt",$newlist);
+SendMessage($admin,"شما کاربر $text را از لیست بن ها در اوردید!");
+}
+else {
+SendMessage($chat_id,"⛔️ شما ادمین نیستید.");
+}
+}
+	
+else
+{
+SendMessage($chat_id,"پیام شما پیدا نشد❌\n Your command could not be found❌");
+}
+?>
