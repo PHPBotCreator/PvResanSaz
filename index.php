@@ -415,7 +415,7 @@ var_dump(makereq('sendMessage',[
          'chat_id'=>$update->message->chat->id,
          'text'=>"Please Select your Language.
 ➖➖➖➖➖
-لطفا زبان حود را انتخاب کنید.",
+لطفا زبان خود را انتخاب کنید.",
   'parse_mode'=>'MarkDown',
          'reply_markup'=>json_encode([
              'keyboard'=>[
@@ -443,7 +443,7 @@ var_dump(makereq('sendMessage',[
          'chat_id'=>$update->message->chat->id,
          'text'=>"Please Select your Language.
 ➖➖➖➖➖
-لطفا زبان حود را انتخاب کنید.",
+لطفا زبان خود را انتخاب کنید.",
   'parse_mode'=>'MarkDown',
          'reply_markup'=>json_encode([
              'keyboard'=>[
@@ -471,7 +471,7 @@ var_dump(makereq('sendMessage',[
          'chat_id'=>$update->message->chat->id,
          'text'=>"Please Select your Language.
 ➖➖➖➖➖
-لطفا زبان حود را انتخاب کنید.",
+لطفا زبان خود را انتخاب کنید.",
   'parse_mode'=>'MarkDown',
          'reply_markup'=>json_encode([
              'keyboard'=>[
