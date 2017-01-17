@@ -1660,7 +1660,7 @@ Copy Right 2016 ©
 
     		var_dump(makereq('sendMessage',[
         	'chat_id'=>$update->message->chat->id,
-        	'text'=>$txt."\n\nCreate Your Own Bot With @PvSazBot",
+        	'text'=>$txt."\n\nCreate Your Own Bot With @CreatePHPBot",
 		'parse_mode'=>'MarkDown',
         	'reply_markup'=>json_encode([
             	'keyboard'=>[
