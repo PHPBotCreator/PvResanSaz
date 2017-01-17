@@ -295,8 +295,8 @@ Your Robot Has ben Created
 		save("bots/$un/data/setting/joingp.txt","✅");
 		
 		$source = file_get_contents("bot/index.php");
-		$source = str_replace("[*BOTTOKEN*]",$token,$source);
-		$source = str_replace("66443035",$from_id,$source);
+		$source = str_replace("**TOKEN**",$token,$source);
+		$source = str_replace("**ADMIN**",$from_id,$source);
 		save("bots/$un/index.php",$source);	
 		file_get_contents("http://api.pwrtelegram.xyz/bot".$token."/setwebhook?url=https://webhook/bots/$un/index.php");
 
